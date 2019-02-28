@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 module.exports = function TokenProvider() {
-  const tokenSecret = "@riF33t";
+  const tokenSecret = "my_secret";
 
   function _createToken(payload, expiration) {
     return new Promise(function(resolve, reject) {
