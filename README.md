@@ -1,6 +1,6 @@
 # react-starter
 
-react-starter is a react project with the goal of easing the development process by providing the components needed for authentication, token management, routing, and styling.
+react-starter is a react project with the goal of easing the development process by providing framework needed for authentication, token management, routing, and styling.
 
 ## Installing and Running
 
@@ -30,4 +30,4 @@ This project provides the following functionality:
 
 ## Getting Started
 
-After getting the project installed and confirming the application is running correctly, begin adding routes/content to the PrivateContext component.
+After getting the project installed and confirming the application is running correctly, begin adding routes/content to the PrivateContent component.
