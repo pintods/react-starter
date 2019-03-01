@@ -6,7 +6,7 @@ export const getColors = async token => {
   try {
     const url = `${BASE_API_URL}/colors`;
     const response = await axios.get(url, getAuthHeaders(token));
-    return await response.data;
+    return response.data;
   } catch (error) {
     if (!error.response) {
       return {

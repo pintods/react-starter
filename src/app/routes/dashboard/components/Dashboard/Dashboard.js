@@ -16,17 +16,13 @@ const Dashboard = () => {
   const authState = useContext(AuthContext);
 
   useEffect(() => {
-    getColors(authState.token)
-      .then(colorsResult => {
-        if (colorsResult.hasOwnProperty("error")) {
-          alertState.addAlert(colorsResult.error);
-          return;
-        }
+    getColors(authState.token).then(colorsResult => {
+      if (colorsResult.hasOwnProperty("error")) {
+        alertState.addAlert(colorsResult.error);
+      } else {
         setColors(colorsResult);
-      })
-      .catch(err => {
-        alertState.addAlert(err);
-      });
+      }
+    });
   }, []);
 
   const colorsList = colors.map(i => <li key={i.id}>{i.color}</li>);
