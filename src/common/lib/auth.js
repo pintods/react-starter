@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import { TOKEN_REFRESH_INTERVAL } from "common/lib/constants";
 
 export const getTokenExpiration = token => {
-  if (token != null) {
+  if (isTokenValid(token)) {
     const decodedToken = jwt.decode(token);
     return decodedToken.exp;
   }
@@ -10,16 +10,16 @@ export const getTokenExpiration = token => {
 };
 
 export const isTokenExpired = token => {
-  if (token != null) {
+  if (isTokenValid(token)) {
     const tokenExpire = getTokenExpiration(token);
     const currentTime = Math.floor(Date.now() / 1000);
     return currentTime > tokenExpire ? true : false;
   }
-  return null;
+  return true;
 };
 
 export const isTokenValid = token => {
-  if (token != null || token != "") {
+  if (token != null && token != "") {
     return true;
   }
   return false;
