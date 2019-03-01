@@ -1,6 +1,6 @@
 # react-starter
 
-react-starter is a react project with the goal of easing the development process by providing framework needed for authentication, token management, routing, and styling.
+react-starter is a react project with the goal of easing the development process by including the frameworks needed for authentication, token management, routing, and styling.
 
 ## Installing and Running
 
