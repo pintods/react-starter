@@ -21,7 +21,7 @@ const Alert = ({ dismissable = true, onDismiss, alertType, children }) => {
     case "error":
       alertClass = errorClass;
       break;
-    case "warning":
+    case "success":
       alertClass = successClass;
       break;
     default:
