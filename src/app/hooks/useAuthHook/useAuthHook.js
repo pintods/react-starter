@@ -41,7 +41,6 @@ const useAuthHook = () => {
       const newState = { authState: true, token: tokenResults.token };
       setAuthState({ ...authState, ...newState });
     }
-    return;
   };
 
   useEffect(() => {
