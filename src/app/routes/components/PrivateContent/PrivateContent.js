@@ -3,6 +3,7 @@ import { jsx, css } from "@emotion/core";
 import FadeTransitionRouter from "app/components/FadeTransitionRouter";
 import Loadable from "react-loadable";
 import About from "app/routes/about/components/About";
+import { Route } from "react-router-dom";
 
 // Example of code splitting on a route
 const LoadableDashboard = Loadable({
@@ -19,8 +20,8 @@ const layoutClass = css`
 const PrivateContent = () => (
   <div css={layoutClass}>
     <FadeTransitionRouter>
-      <LoadableDashboard path="/" />
-      <About path="about" />
+      <Route path="/" exact component={LoadableDashboard} />
+      <Route path="/about" component={About} />
     </FadeTransitionRouter>
   </div>
 );

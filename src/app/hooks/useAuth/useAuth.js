@@ -4,7 +4,7 @@ import { isTokenValid, isTokenExpired, isTokenExpiring } from "common/lib/auth";
 import { refreshToken } from "common/effects/api/auth";
 import axios from "axios";
 
-const useAuthHook = () => {
+const useAuth = () => {
   const tokenKey = `${APP_NAME}_token`;
   let initToken = localStorage.getItem(tokenKey);
   if (isTokenValid(initToken) && isTokenExpired(initToken)) {
@@ -49,7 +49,7 @@ const useAuthHook = () => {
     if (authState.token != null) {
       localStorage.setItem(tokenKey, authState.token);
     }
-  }, [authState.token]);
+  }, [authState.token, tokenKey]);
 
   useEffect(() => {
     axios.interceptors.request.use(config => {
@@ -58,9 +58,9 @@ const useAuthHook = () => {
       }
       return config;
     });
-  }, []);
+  }, [handleTokenRefresh]);
 
   return authState;
 };
 
-export default useAuthHook;
+export default useAuth;

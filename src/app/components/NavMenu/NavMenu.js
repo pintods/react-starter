@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "@reach/router";
+import { Link } from "react-router-dom";
 
 const NavMenu = ({ isExpanded }) => (
   <div
@@ -10,7 +10,7 @@ const NavMenu = ({ isExpanded }) => (
       <Link className="navbar-item" to="/">
         Dashboard
       </Link>
-      <Link className="navbar-item" to="about">
+      <Link className="navbar-item" to="/about">
         About
       </Link>
     </div>

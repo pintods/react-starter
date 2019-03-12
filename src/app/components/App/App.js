@@ -5,18 +5,19 @@ import { AlertContext } from "app/context/AlertContext";
 import Nav from "app/components/Nav";
 import Login from "app/components/Login";
 import Alert from "app/components/Alert";
-import useAuthHook from "app/hooks/useAuthHook";
-import useAlertHook from "app/hooks/useAlertHook";
+import useAuth from "app/hooks/useAuth";
+import useAlert from "app/hooks/useAlert";
 import { getToken } from "common/effects/api/auth";
 import PrivateContent from "app/routes/components/PrivateContent";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const alertClass = css`
   height: 50px;
 `;
 
 const App = () => {
-  const authState = useAuthHook();
-  const alertState = useAlertHook();
+  const authState = useAuth();
+  const alertState = useAlert();
 
   const handleLogin = async data => {
     const tokenResult = await getToken(data.username, data.password);
@@ -37,34 +38,36 @@ const App = () => {
   };
 
   return (
-    <AuthContext.Provider value={authState}>
-      <Nav authStatus={authState.authStatus} onLogout={handleLogout} />
-      <AlertContext.Provider value={alertState}>
-        <div className="section">
-          <div className="container">
-            <div className="columns is-centered" css={alertClass}>
-              {alertState.alertMessage && (
-                <Alert
-                  dissmissble={true}
-                  onDismiss={handleAlertDismiss}
-                  alertType={alertState.alertType}
-                >
-                  {alertState.alertMessage}
-                </Alert>
-              )}
+    <Router>
+      <AuthContext.Provider value={authState}>
+        <Nav authStatus={authState.authStatus} onLogout={handleLogout} />
+        <AlertContext.Provider value={alertState}>
+          <div className="section">
+            <div className="container">
+              <div className="columns is-centered" css={alertClass}>
+                {alertState.alertMessage && (
+                  <Alert
+                    dissmissble={true}
+                    onDismiss={handleAlertDismiss}
+                    alertType={alertState.alertType}
+                  >
+                    {alertState.alertMessage}
+                  </Alert>
+                )}
+              </div>
             </div>
-          </div>
-          {/*
+            {/*
             PrivateContent is used to preventing bloating App
           */}
-          {authState.authStatus ? (
-            <PrivateContent />
-          ) : (
-            <Login path="/" onLogin={handleLogin} />
-          )}
-        </div>
-      </AlertContext.Provider>
-    </AuthContext.Provider>
+            {authState.authStatus ? (
+              <PrivateContent />
+            ) : (
+              <Login path="/" onLogin={handleLogin} />
+            )}
+          </div>
+        </AlertContext.Provider>
+      </AuthContext.Provider>
+    </Router>
   );
 };
 

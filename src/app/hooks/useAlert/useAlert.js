@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useAlertHook = () => {
+const useAlert = () => {
   const initState = {
     alertMessage: null,
     alertType: null
@@ -26,4 +26,4 @@ const useAlertHook = () => {
   return alertState;
 };
 
-export default useAlertHook;
+export default useAlert;

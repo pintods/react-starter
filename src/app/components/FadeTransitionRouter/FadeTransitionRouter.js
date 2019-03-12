@@ -1,22 +1,20 @@
 import React from "react";
-import { Router, Location } from "@reach/router";
-import posed, { PoseGroup } from "react-pose";
+import { Switch } from "react-router-dom";
+import { useTransition, animated } from "react-spring";
+import useRouter from "./useRouter";
 
-const RouteContainer = posed.div({
-  enter: { opacity: 1, delay: 300, beforeChildren: 300 },
-  exit: { opacity: 0 }
-});
+const AnimatedRoute = ({ children }) => {
+  const { location } = useRouter();
+  const transitions = useTransition(location, location => location.pathname, {
+    from: { opacity: 0, height: 0 },
+    enter: { opacity: 1, height: "auto" },
+    leave: { opacity: 0, height: 0 }
+  });
+  return transitions.map(({ item, props, key }) => (
+    <animated.div key={key} style={props}>
+      <Switch location={item}>{children}</Switch>
+    </animated.div>
+  ));
+};
 
-const FadeTransitionRouter = ({ children }) => (
-  <Location>
-    {({ location }) => (
-      <PoseGroup>
-        <RouteContainer key={location.key}>
-          <Router location={location}>{children}</Router>
-        </RouteContainer>
-      </PoseGroup>
-    )}
-  </Location>
-);
-
-export default FadeTransitionRouter;
+export default AnimatedRoute;
